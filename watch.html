@@ -10,6 +10,7 @@
         font-family: monospace;
         font-size: 30px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
@@ -17,14 +18,23 @@
       "
     >
       Loading...
+      <p style="margin-top: 50px; font-size: 20px; color: rgb(51, 46, 46)">
+        If not redirected then <a id="link" href="">click here</a>
+      </p>
     </div>
     <script>
+      const baseUrl = "https://youngnishant.github.io/open-link-in-app";
       var search = window.location.search.substring(1);
       let queryString = new URLSearchParams(search);
-      console.log(queryString.has("v"));
-      let videoCode = queryString.get("v");
-      let youtubeUrlLink = `intent://www.youtube.com/watch?v=${videoCode}/#Intent;package=com.google.android.youtube;scheme=https;end`;
-      window.location = youtubeUrlLink;
+      if (queryString.has("v")) {
+        let videoCode = queryString.get("v");
+        let youtubeUrlLink = `intent://www.youtube.com/watch?v=${videoCode}/#Intent;package=com.google.android.youtube;scheme=https;end`;
+        window.location = youtubeUrlLink;
+        let failed = document.getElementById("link");
+        failed.href = `https://www.youtube.com/watch?v=${videoCode}`;
+      } else {
+        window.location = baseUrl;
+      }
     </script>
   </body>
 </html>
