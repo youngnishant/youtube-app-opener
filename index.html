@@ -34,13 +34,17 @@
       function generateLink() {
         const baseUrl = "https://youngnishant.github.io/open-link-in-app";
         let url = document.getElementById("youtubeUrl").value;
-        let paramString = url.split("?")[1];
-        let queryString = new URLSearchParams(paramString);
-        let videoCode = queryString.get("v");
-
+        let videoCode = "";
+        if (testUrl.includes("youtu.be")) {
+          const videoCode = testUrl.split("/")[1];
+        } else {
+          let paramString = url.split("?")[1];
+          let queryString = new URLSearchParams(paramString);
+          let videoCode = queryString.get("v");
+        }
         var parElement = document.getElementById("generatedLink");
         var textToAdd = document.createTextNode(
-          `${baseUrl}/watch.html?v=${videoCode}`
+          `http://${baseUrl}/watch.html?v=${videoCode}`
         );
         parElement.appendChild(textToAdd);
       }
