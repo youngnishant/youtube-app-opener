@@ -1,1 +1,49 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Youtube Link Opener</title>
+  </head>
+  <body
+    style="
+      font-weight: 700;
+      font-family: monospace;
+      font-size: 30px;
+      width: 100%;
+      height: 80vh;
+    "
+  >
+    <input
+      id="youtubeUrl"
+      type="text"
+      placeholder="Paste your youtube link URL..."
+      style="padding: 10px"
+    />
+    <button
+      type="button"
+      style="padding: 10px; cursor: pointer"
+      onclick="generateLink()"
+    >
+      Generate
+    </button>
+    <br />
+    <br />
+    <br />
+    <b>Link Generated:</b>
+    <p style="text-decoration: dashed; cursor: pointer" id="generatedLink"></p>
+    <script>
+      function generateLink() {
+        const baseUrl = "https://youngnishant.github.io/open-link-in-app";
+        let url = document.getElementById("youtubeUrl").value;
+        let paramString = url.split("?")[1];
+        let queryString = new URLSearchParams(paramString);
+        let videoCode = queryString.get("v");
+
+        var parElement = document.getElementById("generatedLink");
+        var textToAdd = document.createTextNode(
+          `http://${baseUrl}/watch.html?v=${videoCode}`
+        );
+        parElement.appendChild(textToAdd);
+      }
+    </script>
+  </body>
+</html>
