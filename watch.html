@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Loading...</title>
+  </head>
+  <body>
+    <div
+      style="
+        font-weight: 700;
+        font-family: monospace;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80vh;
+      "
+    >
+      Loading...
+    </div>
+    <script>
+      var search = window.location.search.substring(1);
+      let queryString = new URLSearchParams(search);
+      console.log(queryString.has("v"));
+      let videoCode = queryString.get("v");
+      let youtubeUrlLink = `intent://www.youtube.com/watch?v=${videoCode}/#Intent;package=com.google.android.youtube;scheme=https;end`;
+      window.location = youtubeUrlLink;
+    </script>
+  </body>
+</html>
