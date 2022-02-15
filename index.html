@@ -35,16 +35,16 @@
         const baseUrl = "https://youngnishant.github.io/open-link-in-app";
         let url = document.getElementById("youtubeUrl").value;
         let videoCode = "";
-        if (testUrl.includes("youtu.be")) {
-          const videoCode = testUrl.split("/")[1];
+        if (url.includes("youtu.be")) {
+          arr = url.split("/");
+          videoCode = arr[arr.length - 1];
+          console.log(videoCode);
         } else {
-          let paramString = url.split("?")[1];
-          let queryString = new URLSearchParams(paramString);
-          let videoCode = queryString.get("v");
+          videoCode = url.split("v=")[1].substring(0, 11);
         }
         var parElement = document.getElementById("generatedLink");
         var textToAdd = document.createTextNode(
-          `http://${baseUrl}/watch.html?v=${videoCode}`
+          `${baseUrl}/watch.html?v=${videoCode}`
         );
         parElement.appendChild(textToAdd);
       }
