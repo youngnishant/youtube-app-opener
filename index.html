@@ -29,8 +29,14 @@
     <br />
     <br />
     <b>Link Generated:</b>
-    <p style="text-decoration: dashed; cursor: pointer" id="generatedLink"></p>
+    <p
+      onClick="copyToClipboard()"
+      style="text-decoration: dashed; cursor: pointer"
+      id="generatedLink"
+    ></p>
+    <p style="font-size: 20px; color: rgb(106, 106, 106)" id="notify"></p>
     <script>
+      var LinkToBeCopied = "";
       function generateLink() {
         const baseUrl = "https://youngnishant.github.io/open-link-in-app";
         let url = document.getElementById("youtubeUrl").value;
@@ -43,10 +49,17 @@
           videoCode = url.split("v=")[1].substring(0, 11);
         }
         var parElement = document.getElementById("generatedLink");
-        var textToAdd = document.createTextNode(
-          `${baseUrl}/watch.html?v=${videoCode}`
-        );
-        parElement.appendChild(textToAdd);
+        var textToAdd = `${baseUrl}/watch.html?v=${videoCode}`;
+        parElement.innerText = textToAdd;
+        LinkToBeCopied = textToAdd;
+      }
+      function copyToClipboard() {
+        navigator.clipboard.writeText(LinkToBeCopied);
+        var parElement = document.getElementById("notify");
+        parElement.innerText = "Copied...";
+        setTimeout(function () {
+          parElement.innerText = "";
+        }, 1000);
       }
     </script>
   </body>
